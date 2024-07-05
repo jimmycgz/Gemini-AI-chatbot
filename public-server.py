@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 import google.generativeai as genai
+import os
 
 model = genai.GenerativeModel('gemini-pro')
-
-import os
 my_api_key_gemini = os.getenv('GEMI_API_KEY')
-
 genai.configure(api_key=my_api_key_gemini)
 
 app = Flask(__name__)
@@ -21,17 +19,14 @@ def index():
         try:
             prompt = request.form['prompt']
             question = prompt
-
             response = model.generate_content(question)
-
             if response.text:
                 return response.text
             else:
                 return "Sorry, but I think Gemini didn't want to answer that!"
         except Exception as e:
             return "Sorry, but Gemini didn't want to answer that!"
-
     return render_template('index.html', **locals())
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

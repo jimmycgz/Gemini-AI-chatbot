@@ -45,3 +45,14 @@ Feel free to explore and customize the code according to your needs. Contributio
 **Notes**
 * Ensure that you have Python installed on your system.
 * Use a virtual environment for better isolation of dependencies.
+
+
+## Run container
+```
+git clone https://github.com/FareedKhan-dev/Gemini-AI-chatbot.git
+
+
+docker build -t gemini-chatbot .
+export MY_KEY='your-api-key'
+docker run --name my-bot1 -d -p 5000:5000 -e GEMI_API_KEY=$MY_KEY gemini-chatbot 
+```
